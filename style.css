@@ -1,0 +1,354 @@
+ {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Garamond', serif;
+  background-color: #2a2a2a;
+  color: #f3f3f3;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  background-image: url('images/ancient_scroll_texture.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+  color: #ffcc00;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button {
+  background-color: #333;
+  color: #ffcc00;
+  border: 3px solid #ffcc00;
+  padding: 15px 30px;
+  margin: 20px 0;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #555;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+}
+
+button:active {
+  background-color: #222;
+  transform: scale(1);
+}
+
+button:focus {
+  outline: 2px solid #ffcc00;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.6);
+}
+
+#intro {
+  margin-top: 50px;
+}
+
+#intro h1 {
+  font-size: 60px;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+      text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+  }
+  100% {
+      text-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00, 0 0 50px #ffcc00;
+  }
+}
+
+#intro p {
+  font-size: 22px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  animation: slideIn 1.5s ease-out;
+}
+
+@keyframes slideIn {
+  0% {
+      transform: translateY(-100%);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
+#gameplay {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#gameplay h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #00ff00;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+#gameplay p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#gameplay h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+#npc-section, #enemy-section, #shop-section, #battle-result {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  animation: fadeInUp 2s ease-out;
+}
+
+#npc-section img, #enemy-section img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 5px solid #ffcc00;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+}
+
+#npc-section p, #enemy-section p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#npc-section button, #enemy-section button {
+  margin: 10px 5px;
+}
+
+@keyframes fireball {
+  0% {
+      transform: scale(0.8);
+      opacity: 0;
+  }
+  50% {
+      transform: scale(1.5);
+      opacity: 1;
+  }
+  100% {
+      transform: scale(0.8);
+      opacity: 0;
+  }
+}
+
+.fireball {
+  animation: fireball 1.5s forwards;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #ff5733;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+  transform-origin: center;
+}
+
+#battle-result {
+  display: none;
+}
+
+#battle-result p {
+  font-size: 20px;
+  color: #7FFF00;
+  margin-bottom: 20px;
+}
+
+#leaderboard {
+  margin-top: 30px;
+}
+
+#leaderboard table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+#leaderboard th, #leaderboard td {
+  padding: 12px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+#leaderboard th {
+  background-color: #444;
+  font-size: 22px;
+}
+
+#leaderboard tr:nth-child(even) {
+  background-color: #222;
+}
+
+#leaderboard tr:hover {
+  background-color: #555;
+}
+
+#quests ul {
+  list-style-type: none;
+}
+
+#quests li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#quests button {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+#quests button:hover {
+  background-color: #666;
+}
+
+#shop-section ul {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+#shop-section li {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#shop-section li:hover {
+  background-color: #333;
+  transition: background-color 0.3s ease;
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translateY(100px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+#end-game {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+#end-game h2 {
+  font-size: 36px;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+#end-game p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#end-game button {
+  font-size: 20px;
+  padding: 12px 30px;
+  background-color: #444;
+  color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#end-game button:hover {
+  background-color: #666;
+}
+
+@media (max-width: 768px) {
+  body {
+      font-size: 16px;
+  }
+
+  #gameplay {
+      padding: 10px;
+  }
+
+  #gameplay h2 {
+      font-size: 26px;
+  }
+
+  #gameplay p, #gameplay h3 {
+      font-size: 18px;
+  }
+
+  #npc-section img, #enemy-section img {
+      width: 100px;
+      height: 100px;
+  }
+
+  #leaderboard table {
+      font-size: 14px;
+  }
+
+  #quests ul {
+      padding-left: 20px;
+  }
+
+  #quests li {
+      font-size: 18px;
+  }
+
+  #shop-section li {
+      font-size: 16px;
+  }
+
+  button {
+      font-size: 16px;
+      padding: 8px 16px;
+  }
+
+  #end-game h2 {
+      font-size: 30px;
+  }
+
+  #end-game button {
+      font-size: 18px;
+      padding: 8px 25px;
+  }
+}
