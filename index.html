@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сила Темряви</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 16px;
+      background: #444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-card {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #555;
+      cursor: pointer;
+    }
+    .locations-grid {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .locations-grid button {
+      margin: 5px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #555;
+      color: #fff;
+      cursor: pointer;
+    }
+    table {
+      background: #222;
+      color: #fff;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table th, table td {
+      border: 1px solid #555;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <section id="intro">
+      <h1>Сила Темряви</h1>
+      <p>Колись світ був спокійним і гармонійним, але три Сфери, що підтримували баланс — Світло, Темрява та Рівновага — тепер вразились і почали боротьбу за панування...</p>
+      <p>Обери свій шлях і пам'ятай: кожне твоє рішення залишить слід на цьому світі.</p>
+      <button data-next="hero-classes">Розпочати пригоду</button>
+    </section>
+
+    <section id="hero-classes" style="display: none;">
+      <h2>Вибір шляху</h2>
+      <p>Ти стоїш перед великим вибором. З якою силою ти вирушиш у подорож?</p>
+      <div class="hero-card" data-class="Воїн">⚔️ Воїн</div>
+      <div class="hero-card" data-class="Маг">🧙 Маг</div>
+      <div class="hero-card" data-class="Асасин">🕵️ Асасин</div>
+      <div class="hero-card" data-class="Захисник">🛡️ Захисник</div>
+      <div class="hero-card" data-class="Некромант">💀 Некромант</div>
+      <div class="hero-card" data-class="Мисливець">🏹 Мисливець</div>
+      <div class="hero-card" data-class="Вершник драконів">🐉 Вершник драконів</div>
+      <div class="hero-card" data-class="Чарівник часу">⏳ Чарівник часу</div>
+      <button id="choose-class-btn" data-next="chronicles" disabled>Обрати шлях</button>
+    </section>
+
+    <section id="chronicles" style="display: none;">
+      <h2>Історія світу</h2>
+      <p>Світ, який ти знаєш, давно змінився...</p>
+      <button data-next="companion">Продовжити</button>
+    </section>
+
+    <section id="companion" style="display: none;">
+      <h2>Зустріч з таємничим союзником</h2>
+      <p>У темному лісі ти знаходиш пораненого воїна. Він просить про допомогу.</p>
+      <button id="help-companion" data-next="morality-choice">Допомогти</button>
+      <button id="leave-companion" data-next="morality-choice">Ігнорувати</button>
+    </section>
+
+    <section id="morality-choice" style="display: none;">
+      <h2>Випробування душі</h2>
+      <p>Старий провидець ставить тобі запитання:</p>
+      <p><em>"Чи готовий ти пожертвувати частиною себе заради інших?"</em></p>
+      <button id="sacrifice-gold" data-next="prophecy">Пожертвувати 50 золота</button>
+      <button id="refuse-sacrifice" data-next="prophecy">Відмовитися</button>
+    </section>
+
+    <section id="prophecy" style="display: none;">
+      <h2>Пророцтво Древнього</h2>
+      <p>"Твої дії визначать долю трьох світів. Один вибір — і світло згасне... або переможе."</p>
+      <button data-next="internal-conflict">Продовжити</button>
+    </section>
+
+    <section id="internal-conflict" style="display: none;">
+      <h2>Сумніви перед битвою</h2>
+      <p>У переддень вирішальної битви тебе охоплює сумнів. Твій шлях був складним, але попереду — головне випробування.</p>
+      <button data-next="event-choices">Зустріти ворога з гордістю</button>
+      <button data-next="event-choices">Відмовитися від битви</button>
+    </section>
+
+    <section id="event-choices" style="display: none;">
+      <h2>Неочікуване випробування</h2>
+      <p>Ти потрапив у непередбачувану ситуацію. Як діяти далі?</p>
+      <button data-next="battle">Сховатися</button>
+      <button data-next="battle">Битися</button>
+      <button data-next="battle">Втекти</button>
+      <button data-next="battle">Магія часу</button>
+      <button data-next="battle">Стратегія</button>
+      <button data-next="battle">Щит і оборона</button>
+    </section>
+
+    <section id="battle" style="display: none;">
+      <h2>Битва з Чемпіоном Безодні</h2>
+      <div id="player-stats"></div>
+      <div id="enemy-section"><p>Генерується ворог...</p></div>
+      <button id="attack-button">Атакувати</button>
+      <button id="npc-button">Поговорити з NPC</button>
+      <button data-next="alchemy">Використати зілля</button>
+      <button id="end-button">Завершити гру</button>
+      <div id="battle-result"></div>
+    </section>
+
+    <section id="alchemy" style="display: none;">
+      <h2>Алхімічна лабораторія</h2>
+      <p>Комбінуй компоненти:</p>
+      <select>
+        <option>Тіньовий гриб</option>
+        <option>Кров фенікса</option>
+      </select>
+      <select>
+        <option>Кристал болю</option>
+        <option>Еліксир вічного життя</option>
+      </select>
+      <button data-next="ending">Змішати</button>
+    </section>
+
+    <section id="ending" style="display: none;">
+      <h2>Фінал</h2>
+      <p>Ти завершив свою пригоду як <span id="final-class"></span> і обрав свою долю...</p>
+      <h3>Таблиця лідерів</h3>
+      <table id="leaderboard">
+        <thead><tr><th>Гравець</th><th>Рівень</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <button onclick="location.reload()">Грати знову</button>
+    </section>
+  </div>
+
+  <script>
+    
+    let player = {
+      name: 'Гравець',
+      class: null,
+      hp: 100,
+      maxHp: 100,
+      attack: 10,
+      defense: 5,
+      gold: 100,
+      level: 1,
+      xp: 0,
+      inventory: [],
+      completedQuests: [],
+      position: { x: 0, y: 0 },
+      equippedItems: { weapon: null, armor: null, accessory: null },
+      classBonuses: {} 
+    };
+
+    const heroClasses = {
+      'Воїн': { attack: 5, defense: 3, hpBonus: 20 },
+      'Маг': { attack: 3, defense: 2, hpBonus: 10 },
+      'Асасин': { attack: 8, defense: 1, hpBonus: 15 },
+      'Захисник': { attack: 4, defense: 6, hpBonus: 30 },
+      'Некромант': { attack: 6, defense: 3, hpBonus: 10 },
+      'Мисливець': { attack: 7, defense: 2, hpBonus: 12 },
+      'Вершник драконів': { attack: 10, defense: 5, hpBonus: 50 },
+      'Чарівник часу': { attack: 5, defense: 3, hpBonus: 25 }
+    };
+
+    const enemies = [
+      { name: "Орк", hp: 50, attack: 8, defense: 2, goldReward: 30 },
+      { name: "Гоблін", hp: 30, attack: 5, defense: 1, goldReward: 20 },
+      { name: "Дракон", hp: 200, attack: 25, defense: 10, goldReward: 100 },
+      { name: "Чемпіон Безодні", hp: 400, attack: 40, defense: 15, goldReward: 200 }
+    ];
+
+    let enemy = null;
+    function generateEnemy() {
+      enemy = enemies[Math.floor(Math.random() * enemies.length)];
+      document.getElementById('enemy-section').querySelector('p').textContent =
+        `Ім'я: ${enemy.name}, HP: ${enemy.hp}`;
+      updateStats();
+    }
+
+    function attackEnemy() {
+      if (!enemy) return;
+      const damage = Math.max(0, Math.floor(Math.random() * player.attack) - enemy.defense);
+      enemy.hp -= damage;
+      logBattle(`Ти наніс ${damage} шкоди ворогу.`);
+      if (enemy.hp <= 0) winBattle();
+      else enemyAttack();
+    }
+
+    function enemyAttack() {
+      const damage = Math.max(0, Math.floor(Math.random() * enemy.attack) - player.defense);
+      player.hp -= damage;
+      logBattle(`Ворог наніс ${damage} шкоди тобі.`);
+      if (player.hp <= 0) endGame();
+      updateStats();
+    }
+
+    function winBattle() {
+      player.gold += enemy.goldReward;
+      player.xp += 10;
+      logBattle(`Ти переміг ворога! Золото: ${enemy.goldReward}, XP: 10`);
+      checkLevelUp();
+      generateEnemy();
+    }
+
+    function checkLevelUp() {
+      const neededXp = player.level * 100;
+      if (player.xp >= neededXp) {
+        player.level++;
+        player.attack += 5;
+        player.defense += 2;
+        player.maxHp += 20;
+        player.hp = player.maxHp;
+        player.xp = 0;
+        logBattle(`Новий рівень: ${player.level}`);
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('player-stats').textContent =
+        `HP: ${player.hp}/${player.maxHp}, Рівень: ${player.level}, XP: ${player.xp}, Золото: ${player.gold}`;
+    }
+
+    function logBattle(msg) {
+      const p = document.createElement('p');
+      p.textContent = msg;
+      document.getElementById('battle-result').appendChild(p);
+    }
+
+    function endGame() {
+      document.getElementById('battle').style.display = 'none';
+      document.getElementById('ending').style.display = 'block';
+      document.getElementById('final-class').textContent = player.class;
+      updateLeaderboard();
+    }
+
+    function updateLeaderboard() {
+      const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+      leaderboard.push({ name: player.name, level: player.level });
+      leaderboard.sort((a, b) => b.level - a.level);
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+
+      const tbody = document.querySelector('#leaderboard tbody');
+      tbody.innerHTML = '';
+      leaderboard.forEach(e => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${e.name}</td><td>${e.level}</td>`;
+        tbody.appendChild(row);
+      });
+    }
+
+    let selectedClass = null;
+    document.querySelectorAll('.hero-card').forEach(card => {
+      card.addEventListener('click', () => {
+        selectedClass = card.dataset.class;
+        player.class = selectedClass;
+        player.attack += heroClasses[selectedClass].attack;
+        player.defense += heroClasses[selectedClass].defense;
+        player.maxHp += heroClasses[selectedClass].hpBonus;
+        player.hp = player.maxHp;
+        document.getElementById('choose-class-btn').disabled = false;
+        document.querySelectorAll('.hero-card').forEach(c => c.style.border = '1px solid #555');
+        card.style.border = '2px solid yellow';
+      });
+    });
+
+    document.querySelectorAll('[data-next]').forEach(button => {
+      button.addEventListener('click', () => {
+        const current = button.closest('section');
+        const next = document.getElementById(button.dataset.next);
+        if (current && next) {
+          current.style.display = 'none';
+          next.style.display = 'block';
+          if (button.dataset.next === 'battle') generateEnemy();
+        }
+      });
+    });
+
+    document.getElementById('attack-button').addEventListener('click', attackEnemy);
+    document.getElementById('npc-button').addEventListener('click', () => alert('Ти поговорив з NPC!'));
+    document.getElementById('end-button').addEventListener('click', endGame);
+  </script>
+</body>
+</html>
